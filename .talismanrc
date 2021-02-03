@@ -1,0 +1,7 @@
+fileignoreconfig:
+- filename: obj/Debug/net5.0/TodoApi.AssemblyInfoInputs.cache
+  checksum: 8bad2d4b5cf7156ff17c47ce4f6c47878e0256e490d6baaeeb86316bf52d4439
+- filename: obj/project.nuget.cache
+  checksum: 9c23714be14454636ef2d2d48046317064b66c1b3419cefa0482863214d74797
+- filename: obj/project.assets.json
+  checksum: 2840f54e6159ce9694057c0e76c372a30ff621c4dbaad42ecd362dc80893a649
