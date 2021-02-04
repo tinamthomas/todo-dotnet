@@ -13,18 +13,20 @@ namespace TodoApi.Controllers
     [ApiController]
     public class ReposController : ControllerBase
     {
-        private static readonly HttpClient Client = new HttpClient();
+        private readonly IHttpClientFactory _clientFactory;
+        public ReposController(IHttpClientFactory clientFactory)
+        {
+            _clientFactory = clientFactory;
+        }
 
         // GET: api/Repos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Repo>>> GetRepos()
         {
-            Client.DefaultRequestHeaders.Accept.Clear();
-            Client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
-            Client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+            var client = _clientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
 
-            var stringTask = Client.GetStreamAsync("https://api.github.com/orgs/dotnet/repos");
+            var stringTask = client.GetStreamAsync("https://api.github.com/orgs/dotnet/repos");
 
             var msg = await stringTask;
             var repositories = await JsonSerializer.DeserializeAsync<List<Repo>>(msg);
